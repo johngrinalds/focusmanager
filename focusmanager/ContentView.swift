@@ -14,42 +14,62 @@ struct Host: Codable {
 }
 
 struct ContentView: View {
+    @State private var userInput: String = ""
     @State private var message: String = "Hello, World!"
-    @State private var selectedFileURL: URL? = nil
+    @State private var domains: [String] = getDomains()
+
     
     var body: some View {
         VStack {
             Text(message)
                 .padding()
-                .frame(minWidth: 300, maxWidth: .infinity, minHeight: 150, maxHeight: .infinity)
             
-            Button("Add Element") {
-                print("Array starts like:", UserDefaults.standard.stringArray(forKey: "domains") ?? [])
-                var stringArray = UserDefaults.standard.stringArray(forKey: "domains") ?? []
-                
-                stringArray.append("test")
-                
-                // Save array to UserDefaults
-                UserDefaults.standard.set(stringArray, forKey: "domains")
-                
-                print("Array now looks like:", UserDefaults.standard.stringArray(forKey: "domains") ?? [])
-//                writeToFile()
-                
-            }
-            .padding()
+            List(domains, id: \.self) { domain in
+                            Text(domain)
+                        }
+            
+            TextField("www.example.com", text: $userInput)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding()
+            
+            Button("Add Domain") {
+                addDomain()
+            }.padding()
+            
             Button("Clear Defaults"){
-                let domain = Bundle.main.bundleIdentifier!
-                UserDefaults.standard.removePersistentDomain(forName: domain)
-                UserDefaults.standard.synchronize()
-                print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+                clearDomains()
             }.padding()
         }
     }
+    
+    func addDomain(){
+        if userInput != "" && !domains.contains(userInput){
+            domains.append(userInput)
+            domains.sort()
+            UserDefaults.standard.set(domains, forKey: "domains")
+        }
+        userInput = ""
+        writeToHostsFile()
+    }
+    
+    func clearDomains(){
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
+        domains = getDomains()
+        writeToHostsFile()
+    }
 }
 
+func getDomains() -> [String]{
+    return UserDefaults.standard.stringArray(forKey: "domains") ?? []
+}
 
 func writeToHostsFile() {
     // Text to write to the file
+    var joinedDomains = ""
+    if !getDomains().isEmpty{
+        joinedDomains = "127.0.0.1" + " " + getDomains().joined(separator: "\n127.0.0.1 ")
+    }
     let text = """
     ##
     # Host Database
@@ -64,11 +84,7 @@ func writeToHostsFile() {
     # https://www.autodidacts.io/coldturkey-selfcontrol-freedom-leechblock-alternative-in-bash/
     # This is copied to /etc/hosts when the script in the .zshrc file is run
     127.0.0.1 www.wsj.com
-    #127.0.0.1 www.instagram.com
-    #127.0.0.1 www.youtube.com
-    #127.0.0.1 hckrnews.com
-    #127.0.0.1 news.ycombinator.com
-    #127.0.0.1 www.linkedin.com
+    \(joinedDomains)
 
 
     # Added by Docker Desktop
@@ -76,7 +92,8 @@ func writeToHostsFile() {
     127.0.0.1 kubernetes.docker.internal
     # End of section
     """
-    let fileName = "output.txt" // Name of the file
+    
+    let fileName = "focusmanager-hosts" // Name of the file
     
     // Find the document directory
     if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -87,60 +104,12 @@ func writeToHostsFile() {
         do {
             // Write to the file
             try text.write(to: fileURL, atomically: true, encoding: .utf8)
-            print("File created at: \(fileURL.path)")
+//            print("File created at: \(fileURL.path)")
         } catch {
             print("Error writing to file: \(error)")
         }
     }
 }
-
-
-// Utility class for managing JSON operations
-class HostManager {
-    static let shared = HostManager()
-    private let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Hosts.json")
-    
-    // Function to write Host objects to JSON file
-    func saveHost(_ host: Host) {
-        var hosts = loadHosts()
-        hosts.append(host)
-        saveHosts(hosts)
-    }
-    
-    // Function to read all Host objects from JSON file
-    func loadHosts() -> [Host] {
-        guard let data = try? Data(contentsOf: fileURL) else {
-            return []
-        }
-        let decoder = JSONDecoder()
-        do {
-            let hosts = try decoder.decode([Host].self, from: data)
-            return hosts
-        } catch {
-            print("Error decoding hosts: \(error.localizedDescription)")
-            return []
-        }
-    }
-    
-    // Function to save updated array of Host objects to JSON file
-    private func saveHosts(_ hosts: [Host]) {
-        let encoder = JSONEncoder()
-        do {
-            let data = try encoder.encode(hosts)
-            try data.write(to: fileURL)
-        } catch {
-            print("Error encoding hosts: \(error.localizedDescription)")
-        }
-    }
-    
-    // Function to delete a Host object from JSON file
-    func deleteHost(at index: Int) {
-        var hosts = loadHosts()
-        hosts.remove(at: index)
-        saveHosts(hosts)
-    }
-}
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
