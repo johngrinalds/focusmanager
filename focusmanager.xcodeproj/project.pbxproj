@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E17BD7C2C1B076B00CB3EDB /* focusmanagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD7B2C1B076B00CB3EDB /* focusmanagerApp.swift */; };
+		1E17BD7E2C1B076B00CB3EDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */; };
+		1E17BD802C1B076D00CB3EDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E17BD7F2C1B076D00CB3EDB /* Assets.xcassets */; };
+		1E17BD832C1B076D00CB3EDB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E17BD822C1B076D00CB3EDB /* Preview Assets.xcassets */; };
+		1E17BD8E2C1B076D00CB3EDB /* focusmanagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */; };
+		1E17BD982C1B076D00CB3EDB /* focusmanagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */; };
+		1E17BD9A2C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E17BD8A2C1B076D00CB3EDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E17BD702C1B076B00CB3EDB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E17BD772C1B076B00CB3EDB;
+			remoteInfo = focusmanager;
+		};
+		1E17BD942C1B076D00CB3EDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E17BD702C1B076B00CB3EDB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E17BD772C1B076B00CB3EDB;
+			remoteInfo = focusmanager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E17BD782C1B076B00CB3EDB /* focusmanager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = focusmanager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E17BD7B2C1B076B00CB3EDB /* focusmanagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerApp.swift; sourceTree = "<group>"; };
+		1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1E17BD7F2C1B076D00CB3EDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1E17BD822C1B076D00CB3EDB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1E17BD842C1B076D00CB3EDB /* focusmanager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = focusmanager.entitlements; sourceTree = "<group>"; };
+		1E17BD892C1B076D00CB3EDB /* focusmanagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusmanagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerTests.swift; sourceTree = "<group>"; };
+		1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusmanagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITests.swift; sourceTree = "<group>"; };
+		1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1E17BD752C1B076B00CB3EDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E17BD862C1B076D00CB3EDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E17BD902C1B076D00CB3EDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1E17BD6F2C1B076B00CB3EDB = {
+			isa = PBXGroup;
+			children = (
+				1E17BD7A2C1B076B00CB3EDB /* focusmanager */,
+				1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */,
+				1E17BD962C1B076D00CB3EDB /* focusmanagerUITests */,
+				1E17BD792C1B076B00CB3EDB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1E17BD792C1B076B00CB3EDB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1E17BD782C1B076B00CB3EDB /* focusmanager.app */,
+				1E17BD892C1B076D00CB3EDB /* focusmanagerTests.xctest */,
+				1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E17BD7A2C1B076B00CB3EDB /* focusmanager */ = {
+			isa = PBXGroup;
+			children = (
+				1E17BD7B2C1B076B00CB3EDB /* focusmanagerApp.swift */,
+				1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */,
+				1E17BD7F2C1B076D00CB3EDB /* Assets.xcassets */,
+				1E17BD842C1B076D00CB3EDB /* focusmanager.entitlements */,
+				1E17BD812C1B076D00CB3EDB /* Preview Content */,
+			);
+			path = focusmanager;
+			sourceTree = "<group>";
+		};
+		1E17BD812C1B076D00CB3EDB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1E17BD822C1B076D00CB3EDB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */,
+			);
+			path = focusmanagerTests;
+			sourceTree = "<group>";
+		};
+		1E17BD962C1B076D00CB3EDB /* focusmanagerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */,
+				1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */,
+			);
+			path = focusmanagerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1E17BD772C1B076B00CB3EDB /* focusmanager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E17BD9D2C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanager" */;
+			buildPhases = (
+				1E17BD742C1B076B00CB3EDB /* Sources */,
+				1E17BD752C1B076B00CB3EDB /* Frameworks */,
+				1E17BD762C1B076B00CB3EDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = focusmanager;
+			productName = focusmanager;
+			productReference = 1E17BD782C1B076B00CB3EDB /* focusmanager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1E17BD882C1B076D00CB3EDB /* focusmanagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E17BDA02C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanagerTests" */;
+			buildPhases = (
+				1E17BD852C1B076D00CB3EDB /* Sources */,
+				1E17BD862C1B076D00CB3EDB /* Frameworks */,
+				1E17BD872C1B076D00CB3EDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E17BD8B2C1B076D00CB3EDB /* PBXTargetDependency */,
+			);
+			name = focusmanagerTests;
+			productName = focusmanagerTests;
+			productReference = 1E17BD892C1B076D00CB3EDB /* focusmanagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1E17BD922C1B076D00CB3EDB /* focusmanagerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E17BDA32C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanagerUITests" */;
+			buildPhases = (
+				1E17BD8F2C1B076D00CB3EDB /* Sources */,
+				1E17BD902C1B076D00CB3EDB /* Frameworks */,
+				1E17BD912C1B076D00CB3EDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E17BD952C1B076D00CB3EDB /* PBXTargetDependency */,
+			);
+			name = focusmanagerUITests;
+			productName = focusmanagerUITests;
+			productReference = 1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1E17BD702C1B076B00CB3EDB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					1E17BD772C1B076B00CB3EDB = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					1E17BD882C1B076D00CB3EDB = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 1E17BD772C1B076B00CB3EDB;
+					};
+					1E17BD922C1B076D00CB3EDB = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 1E17BD772C1B076B00CB3EDB;
+					};
+				};
+			};
+			buildConfigurationList = 1E17BD732C1B076B00CB3EDB /* Build configuration list for PBXProject "focusmanager" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1E17BD6F2C1B076B00CB3EDB;
+			productRefGroup = 1E17BD792C1B076B00CB3EDB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1E17BD772C1B076B00CB3EDB /* focusmanager */,
+				1E17BD882C1B076D00CB3EDB /* focusmanagerTests */,
+				1E17BD922C1B076D00CB3EDB /* focusmanagerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1E17BD762C1B076B00CB3EDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E17BD832C1B076D00CB3EDB /* Preview Assets.xcassets in Resources */,
+				1E17BD802C1B076D00CB3EDB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E17BD872C1B076D00CB3EDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E17BD912C1B076D00CB3EDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E17BD742C1B076B00CB3EDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E17BD7E2C1B076B00CB3EDB /* ContentView.swift in Sources */,
+				1E17BD7C2C1B076B00CB3EDB /* focusmanagerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E17BD852C1B076D00CB3EDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E17BD8E2C1B076D00CB3EDB /* focusmanagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E17BD8F2C1B076D00CB3EDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E17BD982C1B076D00CB3EDB /* focusmanagerUITests.swift in Sources */,
+				1E17BD9A2C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E17BD8B2C1B076D00CB3EDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E17BD772C1B076B00CB3EDB /* focusmanager */;
+			targetProxy = 1E17BD8A2C1B076D00CB3EDB /* PBXContainerItemProxy */;
+		};
+		1E17BD952C1B076D00CB3EDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E17BD772C1B076B00CB3EDB /* focusmanager */;
+			targetProxy = 1E17BD942C1B076D00CB3EDB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1E17BD9B2C1B076D00CB3EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1E17BD9C2C1B076D00CB3EDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		1E17BD9E2C1B076D00CB3EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = focusmanager/focusmanager.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"focusmanager/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.focusmanager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1E17BD9F2C1B076D00CB3EDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = focusmanager/focusmanager.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"focusmanager/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.focusmanager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1E17BDA12C1B076D00CB3EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.focusmanagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/focusmanager.app/Contents/MacOS/focusmanager";
+			};
+			name = Debug;
+		};
+		1E17BDA22C1B076D00CB3EDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.focusmanagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/focusmanager.app/Contents/MacOS/focusmanager";
+			};
+			name = Release;
+		};
+		1E17BDA42C1B076D00CB3EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.focusmanagerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = focusmanager;
+			};
+			name = Debug;
+		};
+		1E17BDA52C1B076D00CB3EDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.focusmanagerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = focusmanager;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E17BD732C1B076B00CB3EDB /* Build configuration list for PBXProject "focusmanager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E17BD9B2C1B076D00CB3EDB /* Debug */,
+				1E17BD9C2C1B076D00CB3EDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E17BD9D2C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E17BD9E2C1B076D00CB3EDB /* Debug */,
+				1E17BD9F2C1B076D00CB3EDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E17BDA02C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E17BDA12C1B076D00CB3EDB /* Debug */,
+				1E17BDA22C1B076D00CB3EDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E17BDA32C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanagerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E17BDA42C1B076D00CB3EDB /* Debug */,
+				1E17BDA52C1B076D00CB3EDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1E17BD702C1B076B00CB3EDB /* Project object */;
+}
