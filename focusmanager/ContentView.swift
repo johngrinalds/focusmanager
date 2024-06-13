@@ -4,6 +4,8 @@
 //
 //  Created by John Grinalds on 6/13/24.
 //
+// Hardlink the hosts file with: sudo ln -f /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts /etc/hosts
+// osascript -e 'quit app "Chrome"'
 
 import SwiftUI
 import Foundation
@@ -103,13 +105,35 @@ func writeToHostsFile() {
         
         do {
             // Write to the file
-            try text.write(to: fileURL, atomically: true, encoding: .utf8)
+            try text.write(to: fileURL, atomically: false, encoding: .utf8) // Note that atomic needs to be false, otherwise it will copy a new file, breaking the hard link
 //            print("File created at: \(fileURL.path)")
         } catch {
             print("Error writing to file: \(error)")
         }
     }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        flushDNSCache()
+    }
+    
 }
+
+func flushDNSCache() {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+        process.arguments = ["dscacheutil", "-flushcache"]
+
+        do {
+            try process.run()
+            process.waitUntilExit()
+            if process.terminationStatus == 0 {
+                print("DNS cache flushed successfully.")
+            } else {
+                print("Failed to flush DNS cache.")
+            }
+        } catch {
+            print("Error running the process: \(error)")
+        }
+    }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
