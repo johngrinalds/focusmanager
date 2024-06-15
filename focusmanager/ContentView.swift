@@ -10,25 +10,20 @@
 import SwiftUI
 import Foundation
 
-// Define the Host struct conforming to Codable
-struct Host: Codable {
-    var domain: String
-}
-
 struct ContentView: View {
     @State private var userInput: String = ""
-    @State private var message: String = "Hello, World!"
-    @State private var domains: [String] = getDomains()
+    @State private var domains: [String] = UserDefaults.standard.stringArray(forKey: "domains") ?? []
 
     
     var body: some View {
         VStack {
-            Text(message)
+            Text("Blocked Domains")
                 .padding()
             
             List(domains, id: \.self) { domain in
                             Text(domain)
                         }
+            .padding()
             
             TextField("www.example.com", text: $userInput)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -38,8 +33,12 @@ struct ContentView: View {
                 addDomain()
             }.padding()
             
-            Button("Clear Defaults"){
+            Button("Clear Domains"){
                 clearDomains()
+            }.padding()
+            
+            Button("Print Domains"){
+                printDomains()
             }.padding()
         }
     }
@@ -64,6 +63,13 @@ struct ContentView: View {
 
 func getDomains() -> [String]{
     return UserDefaults.standard.stringArray(forKey: "domains") ?? []
+}
+
+func printDomains(){
+    let temp = UserDefaults.standard.stringArray(forKey: "domains") ?? []
+    for item in temp {
+        print(item)
+    }
 }
 
 func writeToHostsFile() {
