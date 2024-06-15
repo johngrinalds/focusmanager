@@ -32,7 +32,10 @@ struct ContentView: View {
             TextField("www.example.com", text: $userInput)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .padding()
-            
+                            .onSubmit {
+                                addDomain()
+                            }
+
             Button("Add Domain") {
                 addDomain()
             }.padding()
