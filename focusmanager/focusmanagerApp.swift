@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct focusmanagerApp: App {
+    @StateObject private var sharedState = SharedState()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(sharedState)
         }
     }
 }

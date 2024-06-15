@@ -10,9 +10,13 @@
 import SwiftUI
 import Foundation
 
+class SharedState: ObservableObject {
+    @Published var domains: [String] = UserDefaults.standard.stringArray(forKey: "domains") ?? []
+}
+
 struct ContentView: View {
     @State private var userInput: String = ""
-    @State private var domains: [String] = UserDefaults.standard.stringArray(forKey: "domains") ?? []
+    @EnvironmentObject var sharedState: SharedState
 
     
     var body: some View {
@@ -20,7 +24,7 @@ struct ContentView: View {
             Text("Blocked Domains")
                 .padding()
             
-            List(domains, id: \.self) { domain in
+            List(sharedState.domains, id: \.self) { domain in
                             Text(domain)
                         }
             .padding()
@@ -44,10 +48,10 @@ struct ContentView: View {
     }
     
     func addDomain(){
-        if userInput != "" && !domains.contains(userInput){
-            domains.append(userInput)
-            domains.sort()
-            UserDefaults.standard.set(domains, forKey: "domains")
+        if userInput != "" && !sharedState.domains.contains(userInput){
+            sharedState.domains.append(userInput)
+            sharedState.domains.sort()
+            UserDefaults.standard.set(sharedState.domains, forKey: "domains")
         }
         userInput = ""
         writeToHostsFile()
@@ -56,7 +60,7 @@ struct ContentView: View {
     func clearDomains(){
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
-        domains = getDomains()
+        sharedState.domains = getDomains()
         writeToHostsFile()
     }
 }
