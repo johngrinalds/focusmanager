@@ -45,6 +45,7 @@
 		1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusmanagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITests.swift; sourceTree = "<group>"; };
 		1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1ECD26C92C1E21E400E30352 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 				1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */,
 				1E17BD962C1B076D00CB3EDB /* focusmanagerUITests */,
 				1E17BD792C1B076B00CB3EDB /* Products */,
+				1ECD26C82C1E21E400E30352 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +129,14 @@
 				1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */,
 			);
 			path = focusmanagerUITests;
+			sourceTree = "<group>";
+		};
+		1ECD26C82C1E21E400E30352 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1ECD26C92C1E21E400E30352 /* CoreWLAN.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

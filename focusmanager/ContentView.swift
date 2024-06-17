@@ -47,6 +47,10 @@ struct ContentView: View {
             Button("Print Domains"){
                 printDomains()
             }.padding()
+            
+            Button("Suspend Blocking for 10 Sec"){
+                suspend()
+            }.padding()
         }
     }
     
@@ -57,15 +61,24 @@ struct ContentView: View {
             UserDefaults.standard.set(sharedState.domains, forKey: "domains")
         }
         userInput = ""
-        writeToHostsFile()
+        writeToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func clearDomains(){
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
         sharedState.domains = getDomains()
-        writeToHostsFile()
+        writeToHostsFile(domainsToWrite: sharedState.domains)
     }
+    
+    func suspend(){
+        writeToHostsFile(domainsToWrite: [])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            writeToHostsFile(domainsToWrite: sharedState.domains)
+            cycleWifi()
+        }
+    }
+    
 }
 
 func getDomains() -> [String]{
@@ -79,11 +92,11 @@ func printDomains(){
     }
 }
 
-func writeToHostsFile() {
+func writeToHostsFile(domainsToWrite: [String]) {
     // Text to write to the file
     var joinedDomains = ""
-    if !getDomains().isEmpty{
-        joinedDomains = "127.0.0.1" + " " + getDomains().joined(separator: "\n127.0.0.1 ")
+    if !domainsToWrite.isEmpty{
+        joinedDomains = "127.0.0.1" + " " + domainsToWrite.joined(separator: "\n127.0.0.1 ")
     }
     let text = """
     ##
@@ -132,8 +145,8 @@ func writeToHostsFile() {
 
 func flushDNSCache() {
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["dscacheutil", "-flushcache"]
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/dscacheutil")
+        process.arguments = ["-flushcache"]
 
         do {
             try process.run()
@@ -142,6 +155,26 @@ func flushDNSCache() {
                 print("DNS cache flushed successfully.")
             } else {
                 print("Failed to flush DNS cache.")
+            }
+        } catch {
+            print("Error running the process: \(error)")
+        }
+    }
+
+func cycleWifi() {
+    // osascript -e 'quit app "Chrome"'
+    // Don't think this can be run from the app's permissions
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/open")
+        process.arguments = ["shortcuts://run-shortcut?name=wifi"]
+
+        do {
+            try process.run()
+            process.waitUntilExit()
+            if process.terminationStatus == 0 {
+                print("Successfully run Wifi Cycle Shortcut.")
+            } else {
+                print("Failed to run Shortcut.")
             }
         } catch {
             print("Error running the process: \(error)")
