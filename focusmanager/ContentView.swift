@@ -21,6 +21,7 @@ struct ContentView: View {
     @State private var random1: Int = 0
     @State private var random2: Int = 0
     @State private var userAnswer: String = ""
+    @State private var userSuspensionRequest: String = ""
     @State private var isAnswerCorrect: Bool = false
 
     
@@ -45,28 +46,21 @@ struct ContentView: View {
                     addDomain()
                 }.padding()
                 
-                Button("Clear Domains"){
-                    clearDomains()
-                }.padding()
-                
-                Button("Print Domains"){
-                    printDomains()
+                Button("Suspend Blocking") {
+                    generateRandomNumbers()
+                    showCustomAlert = true
                 }.padding()
             }
-            
-            Button("Suspend Blocking for 10 Sec"){
-                suspend()
-            }.padding()
-            
-            Button("Show Confirmation Dialog") {
-                generateRandomNumbers()
-                showCustomAlert = true
-                        }
-                        .padding()
         }
         .overlay(
-                    CustomAlertView(show: $showCustomAlert, random1: $random1, random2: $random2, userAnswer: $userAnswer, isAnswerCorrect: $isAnswerCorrect)
-                        .frame(width: 300, height: 200)
+            CustomAlertView(show: $showCustomAlert,
+                            random1: $random1,
+                            random2: $random2,
+                            userAnswer: $userAnswer,
+                            userSuspensionRequest: $userSuspensionRequest,
+                            isAnswerCorrect: $isAnswerCorrect,
+                            suspendClosure: suspend)
+                        .frame(width: 300, height: 300)
                         .background(Color.white)
                         .cornerRadius(12)
                         .shadow(radius: 10)
@@ -91,21 +85,24 @@ struct ContentView: View {
         writeToHostsFile(domainsToWrite: sharedState.domains)
     }
     
-    func suspend(){
-        writeToHostsFile(domainsToWrite: [])
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            writeToHostsFile(domainsToWrite: sharedState.domains)
-            cycleWifi()
+    func suspend(suspensionTime: String){
+        if suspensionTime == "infinity" { // This is the "cheat code" to remove all blocking
+            print("Clearing all domains indefinitely")
+            clearDomains()
+        } else {
+            print("Suspending for \(suspensionTime) minutes")
+            writeToHostsFile(domainsToWrite: [])
+            DispatchQueue.main.asyncAfter(deadline: .now() + (Double(suspensionTime) ?? 10) * 60) {
+                writeToHostsFile(domainsToWrite: sharedState.domains)
+                cycleWifi()
+            }
         }
+        
     }
     
     func generateRandomNumbers() {
         random1 = Int.random(in: 1...10)
         random2 = Int.random(in: 1...10)
-    }
-
-    func checkAnswer() -> Bool {
-        return Int(userAnswer) == random1 + random2
     }
     
 }
@@ -115,15 +112,20 @@ struct CustomAlertView: View {
     @Binding var random1: Int
     @Binding var random2: Int
     @Binding var userAnswer: String
+    @Binding var userSuspensionRequest: String
     @Binding var isAnswerCorrect: Bool
+    let suspendClosure: (String) -> Void // Closure to be executed on confirmation
 
     var body: some View {
         VStack {
             Text("Confirmation")
-                .font(.headline)
+                .font(.headline).padding()
             Text("What is \(random1) + \(random2)?")
             TextField("Your answer", text: $userAnswer)
-//                .keyboardType(.numberPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            Text("How many minutes to suspend for?")
+            TextField("Minutes", text: $userSuspensionRequest)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             HStack {
@@ -132,6 +134,7 @@ struct CustomAlertView: View {
                         // Action to perform when the answer is correct
                         isAnswerCorrect = true
                         print("User confirmed action")
+                        suspendClosure(userSuspensionRequest) // Call the passed function
                         show = false
                     } else {
                         isAnswerCorrect = false
