@@ -17,6 +17,11 @@ class SharedState: ObservableObject {
 struct ContentView: View {
     @State private var userInput: String = ""
     @EnvironmentObject var sharedState: SharedState
+    @State private var showCustomAlert: Bool = false
+    @State private var random1: Int = 0
+    @State private var random2: Int = 0
+    @State private var userAnswer: String = ""
+    @State private var isAnswerCorrect: Bool = false
 
     
     var body: some View {
@@ -35,23 +40,38 @@ struct ContentView: View {
                             .onSubmit {
                                 addDomain()
                             }
-
-            Button("Add Domain") {
-                addDomain()
-            }.padding()
-            
-            Button("Clear Domains"){
-                clearDomains()
-            }.padding()
-            
-            Button("Print Domains"){
-                printDomains()
-            }.padding()
+            HStack {
+                Button("Add Domain") {
+                    addDomain()
+                }.padding()
+                
+                Button("Clear Domains"){
+                    clearDomains()
+                }.padding()
+                
+                Button("Print Domains"){
+                    printDomains()
+                }.padding()
+            }
             
             Button("Suspend Blocking for 10 Sec"){
                 suspend()
             }.padding()
+            
+            Button("Show Confirmation Dialog") {
+                generateRandomNumbers()
+                showCustomAlert = true
+                        }
+                        .padding()
         }
+        .overlay(
+                    CustomAlertView(show: $showCustomAlert, random1: $random1, random2: $random2, userAnswer: $userAnswer, isAnswerCorrect: $isAnswerCorrect)
+                        .frame(width: 300, height: 200)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .shadow(radius: 10)
+                        .opacity(showCustomAlert ? 1 : 0)
+                )
     }
     
     func addDomain(){
@@ -79,6 +99,59 @@ struct ContentView: View {
         }
     }
     
+    func generateRandomNumbers() {
+        random1 = Int.random(in: 1...10)
+        random2 = Int.random(in: 1...10)
+    }
+
+    func checkAnswer() -> Bool {
+        return Int(userAnswer) == random1 + random2
+    }
+    
+}
+
+struct CustomAlertView: View {
+    @Binding var show: Bool
+    @Binding var random1: Int
+    @Binding var random2: Int
+    @Binding var userAnswer: String
+    @Binding var isAnswerCorrect: Bool
+
+    var body: some View {
+        VStack {
+            Text("Confirmation")
+                .font(.headline)
+            Text("What is \(random1) + \(random2)?")
+            TextField("Your answer", text: $userAnswer)
+//                .keyboardType(.numberPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            HStack {
+                Button("Submit") {
+                    if checkAnswer() {
+                        // Action to perform when the answer is correct
+                        isAnswerCorrect = true
+                        print("User confirmed action")
+                        show = false
+                    } else {
+                        isAnswerCorrect = false
+                        print("Incorrect answer")
+                        // Optionally, show an error message
+                    }
+                }
+                .padding()
+                Button("Cancel") {
+                    show = false
+                }
+                .padding()
+            }
+        }
+        .padding()
+    }
+
+    private func checkAnswer() -> Bool {
+        return Int(userAnswer) == random1 + random2
+    }
 }
 
 func getDomains() -> [String]{
