@@ -61,7 +61,7 @@ struct ContentView: View {
                             isAnswerCorrect: $isAnswerCorrect,
                             suspendClosure: suspend)
                         .frame(width: 300, height: 300)
-                        .background(Color.white)
+                        .background(Color(NSColor.windowBackgroundColor))
                         .cornerRadius(12)
                         .shadow(radius: 10)
                         .opacity(showCustomAlert ? 1 : 0)
