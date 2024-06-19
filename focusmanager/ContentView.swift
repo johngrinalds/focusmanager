@@ -50,6 +50,11 @@ struct ContentView: View {
                     generateRandomNumbers()
                     showCustomAlert = true
                 }.padding()
+                
+                Button("Resume Blocking") {
+                    writeToHostsFile(domainsToWrite: sharedState.domains)
+                    cycleWifi()
+                }.padding()
             }
         }
         .overlay(
