@@ -67,6 +67,12 @@ struct ContentView: View {
                 Button("Resume Blocking") {
                     writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
+                    isTimerActive = false
+                    timer?.invalidate()
+                    statusBarController.updateTitle(with: "Time's up")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        statusBarController.updateTitle(with: "FM")
+                    }
                 }.padding()
             }
         }
@@ -139,6 +145,10 @@ struct ContentView: View {
                     isTimerActive = false
                     timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        statusBarController.updateTitle(with: "FM")
+                    }
+                    
                 }
             }
         }
@@ -221,7 +231,7 @@ class StatusBarController: ObservableObject {
     init() {
         statusBar = NSStatusBar.system
         statusItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "Timer"
+        statusItem.button?.title = "FM"
     }
     
     func updateTitle(with time: String) {
