@@ -29,6 +29,9 @@ struct ContentView: View {
     @State private var isTimerActive: Bool = false
     @State private var timer: Timer? = nil
     @StateObject private var statusBarController = StatusBarController()
+    
+    @State private var showTimerInProgressError = false
+
 
     
     var body: some View {
@@ -53,8 +56,12 @@ struct ContentView: View {
                 }.padding()
                 
                 Button("Suspend Blocking") {
-                    generateRandomNumbers()
-                    showCustomAlert = true
+                    if isTimerActive{
+                        showTimerInProgressError = true
+                    } else {
+                        generateRandomNumbers()
+                        showCustomAlert = true
+                    }
                 }.padding()
                 
                 Button("Resume Blocking") {
@@ -63,6 +70,13 @@ struct ContentView: View {
                 }.padding()
             }
         }
+        .alert(isPresented: $showTimerInProgressError) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text("Blocking Suspension in Progress"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
         .overlay(
             CustomAlertView(show: $showCustomAlert,
                             random1: $random1,
@@ -158,6 +172,19 @@ struct CustomAlertView: View {
             TextField("Minutes", text: $userSuspensionRequest)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .onSubmit {
+                    if checkAnswer() {
+                        // Action to perform when the answer is correct
+                        isAnswerCorrect = true
+                        print("Answer correct")
+                        suspendClosure(userSuspensionRequest) // Call the passed function
+                        show = false
+                    } else {
+                        isAnswerCorrect = false
+                        print("Incorrect answer")
+                        // Optionally, show an error message
+                    }
+                }
             HStack {
                 Button("Submit") {
                     if checkAnswer() {
