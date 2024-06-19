@@ -23,6 +23,10 @@ struct ContentView: View {
     @State private var userAnswer: String = ""
     @State private var userSuspensionRequest: String = ""
     @State private var isAnswerCorrect: Bool = false
+    
+    @State private var remainingTime: TimeInterval = 0
+    @State private var isTimerActive: Bool = false
+    @State private var timer: Timer? = nil
 
     
     var body: some View {
@@ -57,6 +61,15 @@ struct ContentView: View {
                 }.padding()
             }
         }
+        .toolbar {
+                    ToolbarItemGroup {
+                        if isTimerActive {
+                            Text(timeString(time: remainingTime))
+                                .font(.system(size: 14, weight: .bold, design: .monospaced))
+                                .padding()
+                        }
+                    }
+                }
         .overlay(
             CustomAlertView(show: $showCustomAlert,
                             random1: $random1,
@@ -90,19 +103,36 @@ struct ContentView: View {
         writeToHostsFile(domainsToWrite: sharedState.domains)
     }
     
+    func timeString(time: TimeInterval) -> String {
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
     func suspend(suspensionTime: String){
-        if suspensionTime == "infinity" { // This is the "cheat code" to remove all blocking
+        if suspensionTime == "infinity" { // This is the "cheat code" to remove all domains from the blocklist
             print("Clearing all domains indefinitely")
             clearDomains()
         } else {
             print("Suspending for \(suspensionTime) minutes")
             writeToHostsFile(domainsToWrite: [])
-            DispatchQueue.main.asyncAfter(deadline: .now() + (Double(suspensionTime) ?? 10) * 60) {
-                writeToHostsFile(domainsToWrite: sharedState.domains)
-                cycleWifi()
+            // Set the suspend period (e.g., 10 minutes)
+            let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
+            remainingTime = suspendPeriod
+            isTimerActive = true
+            
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                if remainingTime > 0 {
+                    remainingTime -= 1
+                } else {
+                    writeToHostsFile(domainsToWrite: sharedState.domains)
+                    cycleWifi()
+                    isTimerActive = false
+                    timer?.invalidate()
+                }
             }
         }
-        
     }
     
     func generateRandomNumbers() {
@@ -138,7 +168,7 @@ struct CustomAlertView: View {
                     if checkAnswer() {
                         // Action to perform when the answer is correct
                         isAnswerCorrect = true
-                        print("User confirmed action")
+                        print("Answer correct")
                         suspendClosure(userSuspensionRequest) // Call the passed function
                         show = false
                     } else {
