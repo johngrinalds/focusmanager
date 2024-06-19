@@ -7,6 +7,7 @@
 // Hardlink the hosts file with: sudo ln -f /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts /etc/hosts
 // osascript -e 'quit app "Chrome"'
 
+import Cocoa
 import SwiftUI
 import Foundation
 
@@ -27,6 +28,7 @@ struct ContentView: View {
     @State private var remainingTime: TimeInterval = 0
     @State private var isTimerActive: Bool = false
     @State private var timer: Timer? = nil
+    @StateObject private var statusBarController = StatusBarController()
 
     
     var body: some View {
@@ -61,15 +63,6 @@ struct ContentView: View {
                 }.padding()
             }
         }
-        .toolbar {
-                    ToolbarItemGroup {
-                        if isTimerActive {
-                            Text(timeString(time: remainingTime))
-                                .font(.system(size: 14, weight: .bold, design: .monospaced))
-                                .padding()
-                        }
-                    }
-                }
         .overlay(
             CustomAlertView(show: $showCustomAlert,
                             random1: $random1,
@@ -125,11 +118,13 @@ struct ContentView: View {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 if remainingTime > 0 {
                     remainingTime -= 1
+                    statusBarController.updateTitle(with: timeString(time: remainingTime))
                 } else {
                     writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     isTimerActive = false
                     timer?.invalidate()
+                    statusBarController.updateTitle(with: "Time's up")
                 }
             }
         }
@@ -189,6 +184,23 @@ struct CustomAlertView: View {
 
     private func checkAnswer() -> Bool {
         return Int(userAnswer) == random1 + random2
+    }
+}
+
+class StatusBarController: ObservableObject {
+    private var statusBar: NSStatusBar
+    private var statusItem: NSStatusItem
+
+    init() {
+        statusBar = NSStatusBar.system
+        statusItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
+        statusItem.button?.title = "Timer"
+    }
+    
+    func updateTitle(with time: String) {
+        DispatchQueue.main.async {
+            self.statusItem.button?.title = time
+        }
     }
 }
 
