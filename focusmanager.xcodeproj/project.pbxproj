@@ -14,6 +14,7 @@
 		1E17BD8E2C1B076D00CB3EDB /* focusmanagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */; };
 		1E17BD982C1B076D00CB3EDB /* focusmanagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */; };
 		1E17BD9A2C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */; };
+		1EEE4D522C24B0E3007E0D52 /* 16-mac.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEE4D512C24B0E3007E0D52 /* 16-mac.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITests.swift; sourceTree = "<group>"; };
 		1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1ECD26C92C1E21E400E30352 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
+		1EEE4D512C24B0E3007E0D52 /* 16-mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "16-mac.png"; path = "focusmanager/Assets.xcassets/AppIcon.appiconset/16-mac.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		1E17BD6F2C1B076B00CB3EDB = {
 			isa = PBXGroup;
 			children = (
+				1EEE4D512C24B0E3007E0D52 /* 16-mac.png */,
 				1E17BD7A2C1B076B00CB3EDB /* focusmanager */,
 				1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */,
 				1E17BD962C1B076D00CB3EDB /* focusmanagerUITests */,
@@ -245,6 +248,7 @@
 			files = (
 				1E17BD832C1B076D00CB3EDB /* Preview Assets.xcassets in Resources */,
 				1E17BD802C1B076D00CB3EDB /* Assets.xcassets in Resources */,
+				1EEE4D522C24B0E3007E0D52 /* 16-mac.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

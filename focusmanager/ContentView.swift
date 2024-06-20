@@ -71,7 +71,7 @@ struct ContentView: View {
                     timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        statusBarController.updateTitle(with: "FM")
+                        statusBarController.revertToIcon()
                     }
                 }.padding()
             }
@@ -146,7 +146,7 @@ struct ContentView: View {
                     timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        statusBarController.updateTitle(with: "FM")
+                        statusBarController.revertToIcon()
                     }
                     
                 }
@@ -231,12 +231,21 @@ class StatusBarController: ObservableObject {
     init() {
         statusBar = NSStatusBar.system
         statusItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "FM"
+        statusItem.button?.image = NSImage(named: NSImage.Name("16-mac"))
+        statusItem.button?.image?.size = NSSize(width: 18, height: 18)
     }
     
     func updateTitle(with time: String) {
         DispatchQueue.main.async {
+            self.statusItem.button?.image = nil
             self.statusItem.button?.title = time
+        }
+    }
+    
+    func revertToIcon() {
+        DispatchQueue.main.async {
+            self.statusItem.button?.image = NSImage(named: NSImage.Name("16-mac"))
+            self.statusItem.button?.title = ""
         }
     }
 }
