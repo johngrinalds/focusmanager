@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E17BD782C1B076B00CB3EDB /* focusmanager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = focusmanager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E17BD782C1B076B00CB3EDB /* FocusManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E17BD7B2C1B076B00CB3EDB /* focusmanagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerApp.swift; sourceTree = "<group>"; };
 		1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1E17BD7F2C1B076D00CB3EDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		1E17BD792C1B076B00CB3EDB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1E17BD782C1B076B00CB3EDB /* focusmanager.app */,
+				1E17BD782C1B076B00CB3EDB /* FocusManager.app */,
 				1E17BD892C1B076D00CB3EDB /* focusmanagerTests.xctest */,
 				1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */,
 			);
@@ -142,9 +142,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1E17BD772C1B076B00CB3EDB /* focusmanager */ = {
+		1E17BD772C1B076B00CB3EDB /* FocusManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E17BD9D2C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanager" */;
+			buildConfigurationList = 1E17BD9D2C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "FocusManager" */;
 			buildPhases = (
 				1E17BD742C1B076B00CB3EDB /* Sources */,
 				1E17BD752C1B076B00CB3EDB /* Frameworks */,
@@ -154,9 +154,9 @@
 			);
 			dependencies = (
 			);
-			name = focusmanager;
+			name = FocusManager;
 			productName = focusmanager;
-			productReference = 1E17BD782C1B076B00CB3EDB /* focusmanager.app */;
+			productReference = 1E17BD782C1B076B00CB3EDB /* FocusManager.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1E17BD882C1B076D00CB3EDB /* focusmanagerTests */ = {
@@ -231,7 +231,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1E17BD772C1B076B00CB3EDB /* focusmanager */,
+				1E17BD772C1B076B00CB3EDB /* FocusManager */,
 				1E17BD882C1B076D00CB3EDB /* focusmanagerTests */,
 				1E17BD922C1B076D00CB3EDB /* focusmanagerUITests */,
 			);
@@ -296,12 +296,12 @@
 /* Begin PBXTargetDependency section */
 		1E17BD8B2C1B076D00CB3EDB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1E17BD772C1B076B00CB3EDB /* focusmanager */;
+			target = 1E17BD772C1B076B00CB3EDB /* FocusManager */;
 			targetProxy = 1E17BD8A2C1B076D00CB3EDB /* PBXContainerItemProxy */;
 		};
 		1E17BD952C1B076D00CB3EDB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1E17BD772C1B076B00CB3EDB /* focusmanager */;
+			target = 1E17BD772C1B076B00CB3EDB /* FocusManager */;
 			targetProxy = 1E17BD942C1B076D00CB3EDB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -552,7 +552,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1E17BD9D2C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "focusmanager" */ = {
+		1E17BD9D2C1B076D00CB3EDB /* Build configuration list for PBXNativeTarget "FocusManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1E17BD9E2C1B076D00CB3EDB /* Debug */,
