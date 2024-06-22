@@ -313,24 +313,6 @@ func writeToHostsFile(domainsToWrite: [String]) {
     
 }
 
-func checkFileExists(){
-    let fileName = "focusmanager-hosts" // Name of the file
-    
-    if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        
-        // Append the file name to the directory
-        let fileURL = documentDirectory.appendingPathComponent(fileName)
-        
-        // Check if the file exists at the specified URL
-        let filePath = fileURL.path
-        if FileManager.default.fileExists(atPath: filePath) {
-            print("File exists at path: \(filePath)")
-        } else {
-            print("File does not exist at path: \(filePath)")
-        }
-    }
-}
-
 func flushDNSCache() {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/dscacheutil")
