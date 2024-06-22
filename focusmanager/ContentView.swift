@@ -58,8 +58,7 @@ struct ContentView: View {
                 }.padding()
                 
                 Button("Get contents of host file") {
-                    hostFileManager.getCurrentHostsFileContents()
-                    print(hostFileManager.checkIfManagedBlock())
+                    hostFileManager.getCurrentManagedBlock()
                 }.padding()
                 
                 Button("Suspend Blocking") {
@@ -72,7 +71,7 @@ struct ContentView: View {
                 }.padding()
                 
                 Button("Resume Blocking") {
-                    writeToHostsFile(domainsToWrite: sharedState.domains)
+                    hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     isTimerActive = false
                     timer?.invalidate()
@@ -113,14 +112,14 @@ struct ContentView: View {
             UserDefaults.standard.set(sharedState.domains, forKey: "domains")
         }
         userInput = ""
-        writeToHostsFile(domainsToWrite: sharedState.domains)
+        hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func clearDomains(){
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
         sharedState.domains = getDomains()
-        writeToHostsFile(domainsToWrite: sharedState.domains)
+        hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func timeString(time: TimeInterval) -> String {
@@ -135,7 +134,7 @@ struct ContentView: View {
             clearDomains()
         } else {
             print("Suspending for \(suspensionTime) minutes")
-            writeToHostsFile(domainsToWrite: [])
+            hostFileManager.writeToHostsFile(domainsToWrite: [])
             // Set the suspend period (e.g., 10 minutes)
             let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
             remainingTime = suspendPeriod
@@ -147,7 +146,7 @@ struct ContentView: View {
                     remainingTime -= 1
                     statusBarController.updateTitle(with: timeString(time: remainingTime))
                 } else {
-                    writeToHostsFile(domainsToWrite: sharedState.domains)
+                    hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     isTimerActive = false
                     timer?.invalidate()
@@ -277,13 +276,15 @@ class HostFileManager: ObservableObject {
         let fileName = "focusmanager-hosts" // Name of the file
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         fileURL = documentDirectory!.appendingPathComponent(fileName)
-        print(checkIfManagedBlock())
+        getCurrentHostsFileContents()
+        if !checkIfManagedBlock() {
+            addManagedBlock()
+        }
     }
     
     func getCurrentHostsFileContents() {
             do {
                 self.hostFileContents = try String(contentsOf: self.fileURL, encoding: .utf8)
-                print(self.hostFileContents)
             } catch {
                 print("Error reading the file: \(error)")
             }
@@ -293,107 +294,63 @@ class HostFileManager: ObservableObject {
         return self.hostFileContents.contains("# Managed by FocusManager")
     }
     
+    func addManagedBlock() {
+        let text = self.hostFileContents + "\n\n# Managed by FocusManager\n# End Managed by FocusManager"
+        self.writeToFile(text: text)
+    }
+    
+    func writeToFile(text: String){
+        do {
+            // Write to the file
+            try text.write(to: self.fileURL, atomically: false, encoding: .utf8) // Note that atomic needs to be false, otherwise it will copy a new file, breaking the hard link
+        } catch {
+            print("Error writing to file: \(error)")
+        }
+
+    }
+    
+    func getCurrentManagedBlock() -> Substring {
+        // Define the pattern
+        let mainString = self.hostFileContents
+        // Define the pattern
+        let pattern = "(?s)# Managed by FocusManager.*?# End Managed by FocusManager"
+
+        // Create a regular expression object
+        do {
+            let regex = try NSRegularExpression(pattern: pattern, options: [])
+            let nsRange = NSRange(mainString.startIndex..<mainString.endIndex, in: mainString)
+            
+            // Find matches
+            if let match = regex.firstMatch(in: mainString, options: [], range: nsRange) {
+                let matchRange = match.range(at: 0)
+                if let swiftRange = Range(matchRange, in: mainString) {
+                    let extractedSubstring = mainString[swiftRange]
+                    return extractedSubstring
+                }
+            }
+        } catch {
+            print("Error creating regex: \(error)")
+        }
+        return ""
+    }
+    
     func writeToHostsFile(domainsToWrite: [String]) {
-        // Text to write to the file
+        
         var joinedDomains = ""
         if !domainsToWrite.isEmpty{
-            joinedDomains = "127.0.0.1" + " " + domainsToWrite.joined(separator: "\n127.0.0.1 ")
+            joinedDomains = "127.0.0.1" + " " + domainsToWrite.joined(separator: "\n127.0.0.1 ") + "\n"
         }
-        let text = """
-        ##
-        # Host Database
-        #
-        # localhost is used to configure the loopback interface
-        # when the system is booting.  Do not change this entry.
-        ##
-        127.0.0.1    localhost
-        255.255.255.255    broadcasthost
-        ::1             localhost
-
-        # https://www.autodidacts.io/coldturkey-selfcontrol-freedom-leechblock-alternative-in-bash/
-        # This is copied to /etc/hosts when the script in the .zshrc file is run
-        127.0.0.1 www.wsj.com
-        \(joinedDomains)
-
-
-        # Added by Docker Desktop
-        # To allow the same kube context to work on the host and the container:
-        127.0.0.1 kubernetes.docker.internal
-        # End of section
-        """
         
-        let fileName = "focusmanager-hosts" // Name of the file
+        getCurrentHostsFileContents()
+        let text = self.hostFileContents
+        let newText = text.replacingOccurrences(of: getCurrentManagedBlock(), with: "# Managed by FocusManager" + "\n" + joinedDomains + "# End Managed by FocusManager")
         
-        // Find the document directory
-        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
-            // Append the file name to the directory
-            let fileURL = documentDirectory.appendingPathComponent(fileName)
-            
-            do {
-                // Write to the file
-                try text.write(to: fileURL, atomically: false, encoding: .utf8) // Note that atomic needs to be false, otherwise it will copy a new file, breaking the hard link
-    //            print("File created at: \(fileURL.path)")
-            } catch {
-                print("Error writing to file: \(error)")
-            }
-        }
+        self.writeToFile(text:newText)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             flushDNSCache()
         }
         
     }
-}
-
-func writeToHostsFile(domainsToWrite: [String]) {
-    // Text to write to the file
-    var joinedDomains = ""
-    if !domainsToWrite.isEmpty{
-        joinedDomains = "127.0.0.1" + " " + domainsToWrite.joined(separator: "\n127.0.0.1 ")
-    }
-    let text = """
-    ##
-    # Host Database
-    #
-    # localhost is used to configure the loopback interface
-    # when the system is booting.  Do not change this entry.
-    ##
-    127.0.0.1    localhost
-    255.255.255.255    broadcasthost
-    ::1             localhost
-
-    # https://www.autodidacts.io/coldturkey-selfcontrol-freedom-leechblock-alternative-in-bash/
-    # This is copied to /etc/hosts when the script in the .zshrc file is run
-    127.0.0.1 www.wsj.com
-    \(joinedDomains)
-
-
-    # Added by Docker Desktop
-    # To allow the same kube context to work on the host and the container:
-    127.0.0.1 kubernetes.docker.internal
-    # End of section
-    """
-    
-    let fileName = "focusmanager-hosts" // Name of the file
-    
-    // Find the document directory
-    if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        
-        // Append the file name to the directory
-        let fileURL = documentDirectory.appendingPathComponent(fileName)
-        
-        do {
-            // Write to the file
-            try text.write(to: fileURL, atomically: false, encoding: .utf8) // Note that atomic needs to be false, otherwise it will copy a new file, breaking the hard link
-//            print("File created at: \(fileURL.path)")
-        } catch {
-            print("Error writing to file: \(error)")
-        }
-    }
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        flushDNSCache()
-    }
-    
 }
 
 func flushDNSCache() {

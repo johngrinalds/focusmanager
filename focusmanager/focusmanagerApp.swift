@@ -48,10 +48,10 @@ func managedHostFileExists() -> Bool{
         // Check if the file exists at the specified URL
         let filePath = fileURL.path
         if FileManager.default.fileExists(atPath: filePath) {
-            print("File exists at path: \(filePath)")
+            print("Hardlinked host file exists at path: \(filePath)")
             return true
         } else {
-            print("File does not exist at path: \(filePath)")
+            print("Hardlinked host file does not exist at path: \(filePath)")
             return false
         }
     }
