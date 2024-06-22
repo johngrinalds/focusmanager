@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct focusmanagerApp: App {
     @StateObject private var sharedState = SharedState()
+    @StateObject private var hostFileManager = HostFileManager()
     @State private var showAlert = false
     
     let hostsAlertText = """
-    The managed hosts file does not exist yet. Before proceeding, run the following commands:
+    The managed hosts file does not exist yet. Before proceeding, run the following commands and then quit and restart the program:
     
     sudo cp /etc/hosts /etc/hosts.backup
     
@@ -26,34 +27,23 @@ struct focusmanagerApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(sharedState)
+                .environmentObject(hostFileManager)
                 .onAppear {
-                        if !managedHostFileExists() {
+                    if !hostFileManager.managedHostFileExists() {
                             showAlert = true
+                    } else {
+                        if !hostFileManager.checkIfManagedBlock() {
+                            hostFileManager.addManagedBlock()
                         }
+                    }
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text("Welcome!"),
                               message: Text(hostsAlertText),
-                              dismissButton: .default(Text("OK")))
+                              dismissButton: .destructive(Text("Quit")) {
+                            NSApplication.shared.terminate(nil)
+                        })
                     }
         }
     }
-}
-
-
-func managedHostFileExists() -> Bool{
-    let fileName = "focusmanager-hosts" // Name of the file
-    if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        let fileURL = documentDirectory.appendingPathComponent(fileName)
-        // Check if the file exists at the specified URL
-        let filePath = fileURL.path
-        if FileManager.default.fileExists(atPath: filePath) {
-            print("Hardlinked host file exists at path: \(filePath)")
-            return true
-        } else {
-            print("Hardlinked host file does not exist at path: \(filePath)")
-            return false
-        }
-    }
-    return false
 }

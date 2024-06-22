@@ -5,7 +5,7 @@
 //  Created by John Grinalds on 6/13/24.
 //
 // Backup hosts file: sudo cp /etc/hosts /etc/hosts.backup
-// Hardlink the hosts file with: sudo ln -f /etc/hosts /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts
+// Hardlink the hosts file with: sudo ln -f /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts /etc/hosts
 // Give the hardlink the needed permissions: sudo chown johngrinalds:staff focusmanager-hosts
 
 import Cocoa
@@ -19,6 +19,7 @@ class SharedState: ObservableObject {
 struct ContentView: View {
     @State private var userInput: String = ""
     @EnvironmentObject var sharedState: SharedState
+    @EnvironmentObject var hostFileManager: HostFileManager
     @State private var showCustomAlert: Bool = false
     @State private var random1: Int = 0
     @State private var random2: Int = 0
@@ -30,7 +31,7 @@ struct ContentView: View {
     @State private var isTimerActive: Bool = false
     @State private var timer: Timer? = nil
     @StateObject private var statusBarController = StatusBarController()
-    @StateObject private var hostFileManager = HostFileManager()
+    
     
     @State private var showTimerInProgressError = false
 
@@ -55,10 +56,6 @@ struct ContentView: View {
             HStack {
                 Button("Add Domain") {
                     addDomain()
-                }.padding()
-                
-                Button("Get contents of host file") {
-                    hostFileManager.getCurrentManagedBlock()
                 }.padding()
                 
                 Button("Suspend Blocking") {
@@ -277,10 +274,20 @@ class HostFileManager: ObservableObject {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         fileURL = documentDirectory!.appendingPathComponent(fileName)
         getCurrentHostsFileContents()
-        if !checkIfManagedBlock() {
-            addManagedBlock()
+    }
+    
+    func managedHostFileExists() -> Bool{
+        // Check if the file exists at the specified URL
+        let filePath = self.fileURL.path
+        if FileManager.default.fileExists(atPath: filePath) {
+            print("Hardlinked host file exists at path: \(filePath)")
+            return true
+        } else {
+            print("Hardlinked host file does not exist at path: \(filePath)")
+            return false
         }
     }
+
     
     func getCurrentHostsFileContents() {
             do {

@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E125E4F2C27829D0067CCF6 /* setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = setup.sh; sourceTree = "<group>"; };
 		1E17BD782C1B076B00CB3EDB /* FocusManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E17BD7B2C1B076B00CB3EDB /* focusmanagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerApp.swift; sourceTree = "<group>"; };
 		1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		1E17BD6F2C1B076B00CB3EDB = {
 			isa = PBXGroup;
 			children = (
+				1E125E4F2C27829D0067CCF6 /* setup.sh */,
 				1EEE4D512C24B0E3007E0D52 /* 16-mac.png */,
 				1E17BD7A2C1B076B00CB3EDB /* focusmanager */,
 				1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */,
