@@ -4,8 +4,9 @@
 //
 //  Created by John Grinalds on 6/13/24.
 //
-// Hardlink the hosts file with: sudo ln -f /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts /etc/hosts
-// osascript -e 'quit app "Chrome"'
+// Backup hosts file: sudo cp /etc/hosts /etc/hosts.backup
+// Hardlink the hosts file with: sudo ln -f /etc/hosts /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts
+// Give the hardlink the needed permissions: sudo chown johngrinalds:staff focusmanager-hosts
 
 import Cocoa
 import SwiftUI
@@ -310,6 +311,24 @@ func writeToHostsFile(domainsToWrite: [String]) {
         flushDNSCache()
     }
     
+}
+
+func checkFileExists(){
+    let fileName = "focusmanager-hosts" // Name of the file
+    
+    if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        
+        // Append the file name to the directory
+        let fileURL = documentDirectory.appendingPathComponent(fileName)
+        
+        // Check if the file exists at the specified URL
+        let filePath = fileURL.path
+        if FileManager.default.fileExists(atPath: filePath) {
+            print("File exists at path: \(filePath)")
+        } else {
+            print("File does not exist at path: \(filePath)")
+        }
+    }
 }
 
 func flushDNSCache() {
