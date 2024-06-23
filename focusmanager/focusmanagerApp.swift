@@ -16,7 +16,7 @@ struct focusmanagerApp: App {
     let hostsAlertText = """
     The managed hosts file does not exist yet. Before proceeding, run the following commands and then quit and restart the program:
     
-    curl -s https://gist.githubusercontent.com/johngrinalds/e1eba94db0218256a766cf0e011b8904/raw/fabf9f9c5370624a01f0e3d3ebdac5284dfb9e68/setup.sh | bash -s <USER>
+    curl -s https://gist.githubusercontent.com/johngrinalds/e1eba94db0218256a766cf0e011b8904/raw/f94c4166fed25eff4a2e5e496152dbb8aab60151/setup.sh | bash -s <USER>
     """
     
     var body: some Scene {
@@ -28,6 +28,7 @@ struct focusmanagerApp: App {
                     if !hostFileManager.managedHostFileExists() {
                             showAlert = true
                     } else {
+                        hostFileManager.getCurrentHostsFileContents()
                         if !hostFileManager.checkIfManagedBlock() {
                             hostFileManager.addManagedBlock()
                         }

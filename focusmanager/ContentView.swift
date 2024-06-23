@@ -8,6 +8,12 @@
 // Hardlink the hosts file with: sudo ln -f /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts /etc/hosts
 // Give the hardlink the needed permissions: sudo chown johngrinalds:staff focusmanager-hosts
 
+//sudo cp /etc/hosts /etc/hosts.backup
+//
+//sudo ln -f /etc/hosts /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
+//
+//sudo chown <USER>:staff /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
+
 import Cocoa
 import SwiftUI
 import Foundation
@@ -273,7 +279,6 @@ class HostFileManager: ObservableObject {
         let fileName = "focusmanager-hosts" // Name of the file
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         fileURL = documentDirectory!.appendingPathComponent(fileName)
-        getCurrentHostsFileContents()
     }
     
     func managedHostFileExists() -> Bool{
