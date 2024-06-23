@@ -16,11 +16,7 @@ struct focusmanagerApp: App {
     let hostsAlertText = """
     The managed hosts file does not exist yet. Before proceeding, run the following commands and then quit and restart the program:
     
-    sudo cp /etc/hosts /etc/hosts.backup
-    
-    sudo ln -f /etc/hosts /Users/<USER>/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts
-    
-    sudo chown <USER>:staff /Users/<USER>/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts
+    curl -s https://gist.githubusercontent.com/johngrinalds/e1eba94db0218256a766cf0e011b8904/raw/fabf9f9c5370624a01f0e3d3ebdac5284dfb9e68/setup.sh | bash -s <USER>
     """
     
     var body: some Scene {
