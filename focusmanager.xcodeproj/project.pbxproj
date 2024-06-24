@@ -35,7 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E125E4F2C27829D0067CCF6 /* setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = setup.sh; sourceTree = "<group>"; };
 		1E17BD782C1B076B00CB3EDB /* FocusManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E17BD7B2C1B076B00CB3EDB /* focusmanagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerApp.swift; sourceTree = "<group>"; };
 		1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusmanagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITests.swift; sourceTree = "<group>"; };
 		1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1E46234E2C29CF7F00619AEA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1ECD26C92C1E21E400E30352 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
 		1EEE4D512C24B0E3007E0D52 /* 16-mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "16-mac.png"; path = "focusmanager/Assets.xcassets/AppIcon.appiconset/16-mac.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,7 +79,7 @@
 		1E17BD6F2C1B076B00CB3EDB = {
 			isa = PBXGroup;
 			children = (
-				1E125E4F2C27829D0067CCF6 /* setup.sh */,
+				1E46234E2C29CF7F00619AEA /* README.md */,
 				1EEE4D512C24B0E3007E0D52 /* 16-mac.png */,
 				1E17BD7A2C1B076B00CB3EDB /* focusmanager */,
 				1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */,
