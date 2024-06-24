@@ -4,7 +4,7 @@
 
 FocusManager is a native macOS tool to manage your system's hosts file, for the purpose of blocking distracting websites.
 
-Unlike some tools that temporarily block distracting sites, this tool temporarily *unblocks* these sites, with the default being the blocked state.
+Unlike some tools that temporarily block distracting sites, this tool temporarily *unblocks* these sites; blocking is the default.
 
 ## Usage
 
@@ -26,7 +26,7 @@ If you are done with a suspension session early, click the "Resume Blocking" but
 
 After running the app for the first time, you must run the following commands to fully setup the FocusManager:
 
-```
+```bash
 # Backup the hosts file (Optional)
 sudo cp /etc/hosts /etc/hosts.backup
 
@@ -39,11 +39,15 @@ sudo chown $USER:staff /Users/<USER>/Library/Containers/com.johngrinalds.focusma
 
 Additionally, you will also need to create a Shortcut to cycle the WiFi off and back on; this prevents automatic redirects from bypassing the updated hosts file once the blocking session is complete.
 
+The shortcut looks like this:
+
+![](./images/wifi.png)
+
 ## Uninstall
 
 To uninstall:
 
-```
+```bash
 # Delete the application and the containers
 rm /Applications/FocusManager.app
 rm /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
