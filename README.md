@@ -1,5 +1,7 @@
 #  FocusManager
 
+![](./Assets.xcassets/AppIcon.appiconset/1024-mac.png)
+
 ## About
 
 FocusManager is a native macOS tool to manage your system's hosts file, for the purpose of blocking distracting websites.
