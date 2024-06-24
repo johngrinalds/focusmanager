@@ -11,6 +11,7 @@ import SwiftUI
 struct focusmanagerApp: App {
     @StateObject private var sharedState = SharedState()
     @StateObject private var hostFileManager = HostFileManager()
+    @StateObject private var statusBarController = StatusBarController()
     @State private var showAlert = false
     
     let hostsAlertText = """
@@ -24,7 +25,9 @@ struct focusmanagerApp: App {
             ContentView()
                 .environmentObject(sharedState)
                 .environmentObject(hostFileManager)
+                .environmentObject(statusBarController)
                 .onAppear {
+                    statusBarController.setup()
                     if !hostFileManager.managedHostFileExists() {
                             showAlert = true
                     } else {
