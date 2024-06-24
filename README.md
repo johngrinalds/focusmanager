@@ -1,6 +1,6 @@
 #  FocusManager
 
-![](./Assets.xcassets/AppIcon.appiconset/1024-mac.png)
+![](./focusmanager/Assets.xcassets/AppIcon.appiconset/256-mac.png)
 
 ## About
 
@@ -36,7 +36,7 @@ sudo cp /etc/hosts /etc/hosts.backup
 sudo ln -f /etc/hosts /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
 
 # Change the ownership of the focusmanager-hosts file to the specified user
-sudo chown $USER:staff /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
+sudo chown <USER>:staff /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
 ```
 
 Additionally, you will also need to create a Shortcut to cycle the WiFi off and back on; this prevents automatic redirects from bypassing the updated hosts file once the blocking session is complete.
