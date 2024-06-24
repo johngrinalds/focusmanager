@@ -20,12 +20,14 @@ import Foundation
 
 class SharedState: ObservableObject {
     @Published var domains: [String] = UserDefaults.standard.stringArray(forKey: "domains") ?? []
+    @Published var isTimerActive: Bool = false
 }
 
 struct ContentView: View {
     @State private var userInput: String = ""
     @EnvironmentObject var sharedState: SharedState
     @EnvironmentObject var hostFileManager: HostFileManager
+    @EnvironmentObject var statusBarController: StatusBarController
     @State private var showCustomAlert: Bool = false
     @State private var random1: Int = 0
     @State private var random2: Int = 0
@@ -34,10 +36,7 @@ struct ContentView: View {
     @State private var isAnswerCorrect: Bool = false
     
     @State private var remainingTime: TimeInterval = 0
-    @State private var isTimerActive: Bool = false
     @State private var timer: Timer? = nil
-    @StateObject private var statusBarController = StatusBarController()
-    
     
     @State private var showTimerInProgressError = false
 
@@ -65,7 +64,7 @@ struct ContentView: View {
                 }.padding()
                 
                 Button("Suspend Blocking") {
-                    if isTimerActive{
+                    if sharedState.isTimerActive{
                         showTimerInProgressError = true
                     } else {
                         generateRandomNumbers()
@@ -76,7 +75,7 @@ struct ContentView: View {
                 Button("Resume Blocking") {
                     hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
-                    isTimerActive = false
+                    sharedState.isTimerActive = false
                     timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -85,13 +84,12 @@ struct ContentView: View {
                 }.padding()
             }
         }
-        .alert(isPresented: $showTimerInProgressError) {
-                    Alert(
-                        title: Text("Error"),
-                        message: Text("Blocking Suspension in Progress"),
-                        dismissButton: .default(Text("OK"))
-                    )
-                }
+        .alert(Text("Error"), isPresented: $showTimerInProgressError) {
+            Button("OK") {
+            }
+        } message: {
+            Text("Blocking Suspension in Progress")
+        }
         .overlay(
             CustomAlertView(show: $showCustomAlert,
                             random1: $random1,
@@ -141,7 +139,7 @@ struct ContentView: View {
             // Set the suspend period (e.g., 10 minutes)
             let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
             remainingTime = suspendPeriod
-            isTimerActive = true
+            sharedState.isTimerActive = true
             
             timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -151,7 +149,7 @@ struct ContentView: View {
                 } else {
                     hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
-                    isTimerActive = false
+                    sharedState.isTimerActive = false
                     timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -236,12 +234,23 @@ struct CustomAlertView: View {
 class StatusBarController: ObservableObject {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
+    private var setupComplete: Bool = false
 
     init() {
-        statusBar = NSStatusBar.system
-        statusItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.image = NSImage(named: NSImage.Name("16-mac"))
-        statusItem.button?.image?.size = NSSize(width: 18, height: 18)
+            self.statusBar = NSStatusBar.system
+            self.statusItem = NSStatusItem()
+        }
+
+    // Move the below setup commands out of the init() function so that the NSStatusItem creation can happen on the main thread
+    func setup() {
+        if !setupComplete { // Check if the initial setup was already completed, so that reopening the window won't trigger the icon display while timer is active
+            setupComplete = true
+            DispatchQueue.main.async {
+                self.statusItem = self.statusBar.statusItem(withLength: NSStatusItem.variableLength)
+                self.statusItem.button?.image = NSImage(named: NSImage.Name("16-mac"))
+                self.statusItem.button?.image?.size = NSSize(width: 18, height: 18)
+            }
+        }
     }
     
     func updateTitle(with time: String) {
