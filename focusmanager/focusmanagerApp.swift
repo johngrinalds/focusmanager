@@ -10,9 +10,9 @@ import SwiftUI
 @main
 struct focusmanagerApp: App {
     @StateObject private var sharedState = SharedState()
-    @StateObject private var hostFileManager = HostFileManager()
+    @StateObject private var hostsFileManager = HostsFileManager()
     @StateObject private var statusBarController = StatusBarController()
-    @State private var showAlert = false
+    @State private var showWelcomeAlert = false
     
     let hostsAlertText = """
     The managed hosts file does not exist yet. Before proceeding, visit the following link to complete the setup then quit and restart the program:
@@ -24,20 +24,20 @@ struct focusmanagerApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(sharedState)
-                .environmentObject(hostFileManager)
+                .environmentObject(hostsFileManager)
                 .environmentObject(statusBarController)
                 .onAppear {
                     statusBarController.setup()
-                    if !hostFileManager.managedHostFileExists() {
-                            showAlert = true
+                    if !hostsFileManager.fileExists() {
+                        showWelcomeAlert = true
                     } else {
-                        hostFileManager.getCurrentHostsFileContents()
-                        if !hostFileManager.checkIfManagedBlock() {
-                            hostFileManager.addManagedBlock()
+                        hostsFileManager.getCurrentFileContents()
+                        if !hostsFileManager.managedSectionExists() {
+                            hostsFileManager.addManagedSection()
                         }
                     }
                     }
-                    .alert(isPresented: $showAlert) {
+                    .alert(isPresented: $showWelcomeAlert) {
                         Alert(title: Text("Welcome!"),
                               message: Text(hostsAlertText),
                               dismissButton: .destructive(Text("Quit")) {

@@ -13,19 +13,17 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
-    @State private var userInput: String = ""
     @EnvironmentObject var sharedState: SharedState
-    @EnvironmentObject var hostFileManager: HostFileManager
+    @EnvironmentObject var hostFileManager: HostsFileManager
     @EnvironmentObject var statusBarController: StatusBarController
+    
+    @State private var userInputDomain: String = ""
     @State private var showCustomAlert: Bool = false
     @State private var random1: Int = 0
     @State private var random2: Int = 0
     @State private var userAnswer: String = ""
     @State private var userSuspensionRequest: String = ""
     @State private var isAnswerCorrect: Bool = false
-    
-    
-    
     @State private var showTimerInProgressError = false
 
 
@@ -40,7 +38,7 @@ struct ContentView: View {
                         }
             .padding()
             
-            TextField("www.example.com", text: $userInput)
+            TextField("www.example.com", text: $userInputDomain)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .padding()
                             .onSubmit {
@@ -61,7 +59,7 @@ struct ContentView: View {
                 }.padding()
                 
                 Button("Resume Blocking") {
-                    hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
+                    hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     sharedState.isTimerActive = false
                     sharedState.timer?.invalidate()
@@ -95,20 +93,20 @@ struct ContentView: View {
     }
     
     func addDomain(){
-        if userInput != "" && !sharedState.domains.contains(userInput){
-            sharedState.domains.append(userInput)
+        if userInputDomain != "" && !sharedState.domains.contains(userInputDomain){
+            sharedState.domains.append(userInputDomain)
             sharedState.domains.sort()
             UserDefaults.standard.set(sharedState.domains, forKey: "domains")
         }
-        userInput = ""
-        hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
+        userInputDomain = ""
+        hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func clearDomains(){
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
         sharedState.domains = getDomains()
-        hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
+        hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func timeString(time: TimeInterval) -> String {
@@ -123,7 +121,7 @@ struct ContentView: View {
             clearDomains()
         } else {
             print("Suspending for \(suspensionTime) minutes")
-            hostFileManager.writeToHostsFile(domainsToWrite: [])
+            hostFileManager.writeDomainsToHostsFile(domainsToWrite: [])
             // Set the suspend period (e.g., 10 minutes)
             let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
             sharedState.remainingTime = suspendPeriod
@@ -135,7 +133,7 @@ struct ContentView: View {
                     sharedState.remainingTime -= 1
                     statusBarController.updateTitle(with: timeString(time: sharedState.remainingTime))
                 } else {
-                    hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
+                    hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     sharedState.isTimerActive = false
                     sharedState.timer?.invalidate()
