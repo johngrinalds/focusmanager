@@ -33,10 +33,10 @@ After running the app for the first time, you must run the following commands to
 sudo cp /etc/hosts /etc/hosts.backup
 
 # Create a symbolic hardlink for the hosts file in the user's focusmanager directory
-sudo ln -f /etc/hosts /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
+sudo ln -f /etc/hosts /Users/$USER/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
 
 # Change the ownership of the focusmanager-hosts file to the specified user
-sudo chown <USER>:staff /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
+sudo chown $USER:staff /Users/$USER/Library/Containers/com.johngrinalds.focusmanager/Data/Documents/focusmanager-hosts
 ```
 
 Additionally, you will also need to create a Shortcut to cycle the WiFi off and back on; this prevents automatic redirects from bypassing the updated hosts file once the blocking session is complete.
