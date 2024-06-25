@@ -25,8 +25,6 @@ struct ContentView: View {
     @State private var userSuspensionRequest: String = ""
     @State private var isAnswerCorrect: Bool = false
     @State private var showTimerInProgressError = false
-
-
     
     var body: some View {
         VStack {
@@ -59,14 +57,7 @@ struct ContentView: View {
                 }.padding()
                 
                 Button("Resume Blocking") {
-                    hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
-                    cycleWifi()
-                    sharedState.isTimerActive = false
-                    sharedState.timer?.invalidate()
-                    statusBarController.updateTitle(with: "Time's up")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        statusBarController.revertToIcon()
-                    }
+                    resumeBlocking()
                 }.padding()
             }
         }
@@ -101,6 +92,30 @@ struct ContentView: View {
         userInputDomain = ""
         hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
     }
+
+    func suspend(suspensionTime: String){
+        if suspensionTime == "infinity" { // This is the "cheat code" to remove all domains from the blocklist
+            print("Clearing all domains indefinitely")
+            clearDomains()
+        } else {
+            print("Suspending for \(suspensionTime) minutes")
+            hostsFileManager.writeDomainsToHostsFile(domainsToWrite: [])
+            // Set the suspend period (default 10 minutes)
+            let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
+            sharedState.remainingTime = suspendPeriod
+            sharedState.isTimerActive = true
+            
+            sharedState.timer?.invalidate()
+            sharedState.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                if sharedState.remainingTime > 0 {
+                    sharedState.remainingTime -= 1
+                    statusBarController.updateTitle(with: timeString(time: sharedState.remainingTime))
+                } else {
+                    resumeBlocking()
+                }
+            }
+        }
+    }
     
     func clearDomains(){
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -115,41 +130,20 @@ struct ContentView: View {
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    func suspend(suspensionTime: String){
-        if suspensionTime == "infinity" { // This is the "cheat code" to remove all domains from the blocklist
-            print("Clearing all domains indefinitely")
-            clearDomains()
-        } else {
-            print("Suspending for \(suspensionTime) minutes")
-            hostsFileManager.writeDomainsToHostsFile(domainsToWrite: [])
-            // Set the suspend period (e.g., 10 minutes)
-            let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
-            sharedState.remainingTime = suspendPeriod
-            sharedState.isTimerActive = true
-            
-            sharedState.timer?.invalidate()
-            sharedState.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                if sharedState.remainingTime > 0 {
-                    sharedState.remainingTime -= 1
-                    statusBarController.updateTitle(with: timeString(time: sharedState.remainingTime))
-                } else {
-                    hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
-                    cycleWifi()
-                    sharedState.isTimerActive = false
-                    sharedState.timer?.invalidate()
-                    statusBarController.updateTitle(with: "Time's up")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        statusBarController.revertToIcon()
-                    }
-                    
-                }
-            }
-        }
-    }
-    
     func generateRandomNumbers() {
         randomInt1 = Int.random(in: 1...10)
         randomInt2 = Int.random(in: 1...10)
+    }
+    
+    func resumeBlocking() {
+        hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
+        cycleWifi()
+        sharedState.isTimerActive = false
+        sharedState.timer?.invalidate()
+        statusBarController.updateTitle(with: "Time's up")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            statusBarController.revertToIcon()
+        }
     }
     
 }
