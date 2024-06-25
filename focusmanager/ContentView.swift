@@ -4,9 +4,6 @@
 //
 //  Created by John Grinalds on 6/13/24.
 //
-// Backup hosts file: sudo cp /etc/hosts /etc/hosts.backup
-// Hardlink the hosts file with: sudo ln -f /Users/johngrinalds/Library/Containers/com.example.focusmanager/Data/Documents/focusmanager-hosts /etc/hosts
-// Give the hardlink the needed permissions: sudo chown johngrinalds:staff focusmanager-hosts
 
 import Cocoa
 import SwiftUI

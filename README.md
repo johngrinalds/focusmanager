@@ -56,4 +56,10 @@ rm /Users/<USER>/Library/Containers/com.johngrinalds.focusmanager/Data/Documents
 
 # Revert ownership of the hosts file
 sudo chown root:root /etc/hosts
+
+# Or
+
+# Restore hosts file backup
+sudo rm /etc/hosts
+sudo cp hosts.backup hosts 
 ```
