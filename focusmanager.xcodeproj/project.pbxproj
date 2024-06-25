@@ -11,9 +11,6 @@
 		1E17BD7E2C1B076B00CB3EDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD7D2C1B076B00CB3EDB /* ContentView.swift */; };
 		1E17BD802C1B076D00CB3EDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E17BD7F2C1B076D00CB3EDB /* Assets.xcassets */; };
 		1E17BD832C1B076D00CB3EDB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E17BD822C1B076D00CB3EDB /* Preview Assets.xcassets */; };
-		1E17BD8E2C1B076D00CB3EDB /* focusmanagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */; };
-		1E17BD982C1B076D00CB3EDB /* focusmanagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */; };
-		1E17BD9A2C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */; };
 		1E3128B82C2AF8CE00C53CCD /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128B72C2AF8CE00C53CCD /* SharedState.swift */; };
 		1E3128BA2C2AF93300C53CCD /* SuspensionDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128B92C2AF93300C53CCD /* SuspensionDialogView.swift */; };
 		1E3128BC2C2AF97C00C53CCD /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BB2C2AF97C00C53CCD /* StatusBarController.swift */; };
@@ -47,17 +44,13 @@
 		1E17BD822C1B076D00CB3EDB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1E17BD842C1B076D00CB3EDB /* focusmanager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = focusmanager.entitlements; sourceTree = "<group>"; };
 		1E17BD892C1B076D00CB3EDB /* focusmanagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusmanagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerTests.swift; sourceTree = "<group>"; };
 		1E17BD932C1B076D00CB3EDB /* focusmanagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusmanagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITests.swift; sourceTree = "<group>"; };
-		1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1E3128B72C2AF8CE00C53CCD /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
 		1E3128B92C2AF93300C53CCD /* SuspensionDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspensionDialogView.swift; sourceTree = "<group>"; };
 		1E3128BB2C2AF97C00C53CCD /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		1E3128BD2C2AF9A800C53CCD /* HostsFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostsFileManager.swift; sourceTree = "<group>"; };
 		1E3128BF2C2AFA1D00C53CCD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1E46234E2C29CF7F00619AEA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1ECD26C92C1E21E400E30352 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
 		1EEE4D512C24B0E3007E0D52 /* 16-mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "16-mac.png"; path = "focusmanager/Assets.xcassets/AppIcon.appiconset/16-mac.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,8 +85,6 @@
 				1E46234E2C29CF7F00619AEA /* README.md */,
 				1EEE4D512C24B0E3007E0D52 /* 16-mac.png */,
 				1E17BD7A2C1B076B00CB3EDB /* focusmanager */,
-				1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */,
-				1E17BD962C1B076D00CB3EDB /* focusmanagerUITests */,
 				1E17BD792C1B076B00CB3EDB /* Products */,
 				1ECD26C82C1E21E400E30352 /* Frameworks */,
 			);
@@ -134,27 +125,9 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		1E17BD8C2C1B076D00CB3EDB /* focusmanagerTests */ = {
-			isa = PBXGroup;
-			children = (
-				1E17BD8D2C1B076D00CB3EDB /* focusmanagerTests.swift */,
-			);
-			path = focusmanagerTests;
-			sourceTree = "<group>";
-		};
-		1E17BD962C1B076D00CB3EDB /* focusmanagerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */,
-				1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */,
-			);
-			path = focusmanagerUITests;
-			sourceTree = "<group>";
-		};
 		1ECD26C82C1E21E400E30352 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1ECD26C92C1E21E400E30352 /* CoreWLAN.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -304,7 +277,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E17BD8E2C1B076D00CB3EDB /* focusmanagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,8 +284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E17BD982C1B076D00CB3EDB /* focusmanagerUITests.swift in Sources */,
-				1E17BD9A2C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
