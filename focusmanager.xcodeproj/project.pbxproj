@@ -15,7 +15,7 @@
 		1E17BD982C1B076D00CB3EDB /* focusmanagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */; };
 		1E17BD9A2C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */; };
 		1E3128B82C2AF8CE00C53CCD /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128B72C2AF8CE00C53CCD /* SharedState.swift */; };
-		1E3128BA2C2AF93300C53CCD /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128B92C2AF93300C53CCD /* CustomAlertView.swift */; };
+		1E3128BA2C2AF93300C53CCD /* SuspensionDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128B92C2AF93300C53CCD /* SuspensionDialogView.swift */; };
 		1E3128BC2C2AF97C00C53CCD /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BB2C2AF97C00C53CCD /* StatusBarController.swift */; };
 		1E3128BE2C2AF9A800C53CCD /* HostsFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BD2C2AF9A800C53CCD /* HostsFileManager.swift */; };
 		1E3128C02C2AFA1D00C53CCD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BF2C2AFA1D00C53CCD /* Utils.swift */; };
@@ -52,7 +52,7 @@
 		1E17BD972C1B076D00CB3EDB /* focusmanagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITests.swift; sourceTree = "<group>"; };
 		1E17BD992C1B076D00CB3EDB /* focusmanagerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusmanagerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1E3128B72C2AF8CE00C53CCD /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
-		1E3128B92C2AF93300C53CCD /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		1E3128B92C2AF93300C53CCD /* SuspensionDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspensionDialogView.swift; sourceTree = "<group>"; };
 		1E3128BB2C2AF97C00C53CCD /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		1E3128BD2C2AF9A800C53CCD /* HostsFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostsFileManager.swift; sourceTree = "<group>"; };
 		1E3128BF2C2AFA1D00C53CCD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 				1E17BD842C1B076D00CB3EDB /* focusmanager.entitlements */,
 				1E17BD812C1B076D00CB3EDB /* Preview Content */,
 				1E3128B72C2AF8CE00C53CCD /* SharedState.swift */,
-				1E3128B92C2AF93300C53CCD /* CustomAlertView.swift */,
+				1E3128B92C2AF93300C53CCD /* SuspensionDialogView.swift */,
 				1E3128BB2C2AF97C00C53CCD /* StatusBarController.swift */,
 				1E3128BD2C2AF9A800C53CCD /* HostsFileManager.swift */,
 				1E3128BF2C2AFA1D00C53CCD /* Utils.swift */,
@@ -294,7 +294,7 @@
 				1E3128BE2C2AF9A800C53CCD /* HostsFileManager.swift in Sources */,
 				1E17BD7E2C1B076B00CB3EDB /* ContentView.swift in Sources */,
 				1E3128C02C2AFA1D00C53CCD /* Utils.swift in Sources */,
-				1E3128BA2C2AF93300C53CCD /* CustomAlertView.swift in Sources */,
+				1E3128BA2C2AF93300C53CCD /* SuspensionDialogView.swift in Sources */,
 				1E3128BC2C2AF97C00C53CCD /* StatusBarController.swift in Sources */,
 				1E17BD7C2C1B076B00CB3EDB /* focusmanagerApp.swift in Sources */,
 			);

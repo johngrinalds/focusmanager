@@ -14,13 +14,13 @@ import Foundation
 
 struct ContentView: View {
     @EnvironmentObject var sharedState: SharedState
-    @EnvironmentObject var hostFileManager: HostsFileManager
+    @EnvironmentObject var hostsFileManager: HostsFileManager
     @EnvironmentObject var statusBarController: StatusBarController
     
     @State private var userInputDomain: String = ""
-    @State private var showCustomAlert: Bool = false
-    @State private var random1: Int = 0
-    @State private var random2: Int = 0
+    @State private var showSuspensionDialogView: Bool = false
+    @State private var randomInt1: Int = 0
+    @State private var randomInt2: Int = 0
     @State private var userAnswer: String = ""
     @State private var userSuspensionRequest: String = ""
     @State private var isAnswerCorrect: Bool = false
@@ -54,12 +54,12 @@ struct ContentView: View {
                         showTimerInProgressError = true
                     } else {
                         generateRandomNumbers()
-                        showCustomAlert = true
+                        showSuspensionDialogView = true
                     }
                 }.padding()
                 
                 Button("Resume Blocking") {
-                    hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
+                    hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     sharedState.isTimerActive = false
                     sharedState.timer?.invalidate()
@@ -77,9 +77,9 @@ struct ContentView: View {
             Text("Blocking Suspension in Progress")
         }
         .overlay(
-            CustomAlertView(show: $showCustomAlert,
-                            random1: $random1,
-                            random2: $random2,
+            SuspensionDialogView(show: $showSuspensionDialogView,
+                            randomInt1: $randomInt1,
+                            randomInt2: $randomInt2,
                             userAnswer: $userAnswer,
                             userSuspensionRequest: $userSuspensionRequest,
                             isAnswerCorrect: $isAnswerCorrect,
@@ -88,7 +88,7 @@ struct ContentView: View {
                         .background(Color(NSColor.windowBackgroundColor))
                         .cornerRadius(12)
                         .shadow(radius: 10)
-                        .opacity(showCustomAlert ? 1 : 0)
+                        .opacity(showSuspensionDialogView ? 1 : 0)
                 )
     }
     
@@ -99,14 +99,14 @@ struct ContentView: View {
             UserDefaults.standard.set(sharedState.domains, forKey: "domains")
         }
         userInputDomain = ""
-        hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
+        hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func clearDomains(){
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.synchronize()
         sharedState.domains = getDomains()
-        hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
+        hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
     }
     
     func timeString(time: TimeInterval) -> String {
@@ -121,7 +121,7 @@ struct ContentView: View {
             clearDomains()
         } else {
             print("Suspending for \(suspensionTime) minutes")
-            hostFileManager.writeDomainsToHostsFile(domainsToWrite: [])
+            hostsFileManager.writeDomainsToHostsFile(domainsToWrite: [])
             // Set the suspend period (e.g., 10 minutes)
             let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
             sharedState.remainingTime = suspendPeriod
@@ -133,7 +133,7 @@ struct ContentView: View {
                     sharedState.remainingTime -= 1
                     statusBarController.updateTitle(with: timeString(time: sharedState.remainingTime))
                 } else {
-                    hostFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
+                    hostsFileManager.writeDomainsToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     sharedState.isTimerActive = false
                     sharedState.timer?.invalidate()
@@ -148,8 +148,8 @@ struct ContentView: View {
     }
     
     func generateRandomNumbers() {
-        random1 = Int.random(in: 1...10)
-        random2 = Int.random(in: 1...10)
+        randomInt1 = Int.random(in: 1...10)
+        randomInt2 = Int.random(in: 1...10)
     }
     
 }
