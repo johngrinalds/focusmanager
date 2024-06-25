@@ -10,4 +10,6 @@ import Foundation
 class SharedState: ObservableObject {
     @Published var domains: [String] = UserDefaults.standard.stringArray(forKey: "domains") ?? []
     @Published var isTimerActive: Bool = false
+    @Published var remainingTime: TimeInterval = 0
+    @Published var timer: Timer? = nil
 }

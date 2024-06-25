@@ -24,8 +24,7 @@ struct ContentView: View {
     @State private var userSuspensionRequest: String = ""
     @State private var isAnswerCorrect: Bool = false
     
-    @State private var remainingTime: TimeInterval = 0
-    @State private var timer: Timer? = nil
+    
     
     @State private var showTimerInProgressError = false
 
@@ -65,7 +64,7 @@ struct ContentView: View {
                     hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     sharedState.isTimerActive = false
-                    timer?.invalidate()
+                    sharedState.timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         statusBarController.revertToIcon()
@@ -127,19 +126,19 @@ struct ContentView: View {
             hostFileManager.writeToHostsFile(domainsToWrite: [])
             // Set the suspend period (e.g., 10 minutes)
             let suspendPeriod: TimeInterval = (Double(suspensionTime) ?? 10) * 60
-            remainingTime = suspendPeriod
+            sharedState.remainingTime = suspendPeriod
             sharedState.isTimerActive = true
             
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                if remainingTime > 0 {
-                    remainingTime -= 1
-                    statusBarController.updateTitle(with: timeString(time: remainingTime))
+            sharedState.timer?.invalidate()
+            sharedState.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                if sharedState.remainingTime > 0 {
+                    sharedState.remainingTime -= 1
+                    statusBarController.updateTitle(with: timeString(time: sharedState.remainingTime))
                 } else {
                     hostFileManager.writeToHostsFile(domainsToWrite: sharedState.domains)
                     cycleWifi()
                     sharedState.isTimerActive = false
-                    timer?.invalidate()
+                    sharedState.timer?.invalidate()
                     statusBarController.updateTitle(with: "Time's up")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         statusBarController.revertToIcon()
