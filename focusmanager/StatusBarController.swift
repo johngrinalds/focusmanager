@@ -24,7 +24,7 @@ class StatusBarController: ObservableObject {
             setupComplete = true
             DispatchQueue.main.async {
                 self.statusItem = self.statusBar.statusItem(withLength: NSStatusItem.variableLength)
-                self.statusItem.button?.image = NSImage(named: NSImage.Name("16-mac"))
+                self.statusItem.button?.image = NSImage(named: NSImage.Name("16-mac-transparent"))
                 self.statusItem.button?.image?.size = NSSize(width: 18, height: 18)
             }
         }
@@ -39,7 +39,7 @@ class StatusBarController: ObservableObject {
     
     func revertToIcon() {
         DispatchQueue.main.async {
-            self.statusItem.button?.image = NSImage(named: NSImage.Name("16-mac"))
+            self.statusItem.button?.image = NSImage(named: NSImage.Name("16-mac-transparent"))
             self.statusItem.button?.title = ""
         }
     }

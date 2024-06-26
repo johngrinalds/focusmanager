@@ -16,7 +16,7 @@
 		1E3128BC2C2AF97C00C53CCD /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BB2C2AF97C00C53CCD /* StatusBarController.swift */; };
 		1E3128BE2C2AF9A800C53CCD /* HostsFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BD2C2AF9A800C53CCD /* HostsFileManager.swift */; };
 		1E3128C02C2AFA1D00C53CCD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3128BF2C2AFA1D00C53CCD /* Utils.swift */; };
-		1EEE4D522C24B0E3007E0D52 /* 16-mac.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEE4D512C24B0E3007E0D52 /* 16-mac.png */; };
+		1ECA88252C2C7AC900B39FC8 /* 16-mac-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ECA88242C2C7AC900B39FC8 /* 16-mac-transparent.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 		1E3128BD2C2AF9A800C53CCD /* HostsFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostsFileManager.swift; sourceTree = "<group>"; };
 		1E3128BF2C2AFA1D00C53CCD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1E46234E2C29CF7F00619AEA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1EEE4D512C24B0E3007E0D52 /* 16-mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "16-mac.png"; path = "focusmanager/Assets.xcassets/AppIcon.appiconset/16-mac.png"; sourceTree = "<group>"; };
+		1ECA88242C2C7AC900B39FC8 /* 16-mac-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "16-mac-transparent.png"; path = "focusmanager/Assets.xcassets/TransparentStatusBarIcon.imageset/16-mac-transparent.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +82,8 @@
 		1E17BD6F2C1B076B00CB3EDB = {
 			isa = PBXGroup;
 			children = (
+				1ECA88242C2C7AC900B39FC8 /* 16-mac-transparent.png */,
 				1E46234E2C29CF7F00619AEA /* README.md */,
-				1EEE4D512C24B0E3007E0D52 /* 16-mac.png */,
 				1E17BD7A2C1B076B00CB3EDB /* focusmanager */,
 				1E17BD792C1B076B00CB3EDB /* Products */,
 				1ECD26C82C1E21E400E30352 /* Frameworks */,
@@ -236,9 +236,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ECA88252C2C7AC900B39FC8 /* 16-mac-transparent.png in Resources */,
 				1E17BD832C1B076D00CB3EDB /* Preview Assets.xcassets in Resources */,
 				1E17BD802C1B076D00CB3EDB /* Assets.xcassets in Resources */,
-				1EEE4D522C24B0E3007E0D52 /* 16-mac.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
